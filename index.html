@@ -15,12 +15,16 @@
     <!-- HEADER -->
     <header>
         <div class="container">
-        
+
             <h1>Farmácia DoBem</h1>
             <nav>
                 <a href="#servicos">Serviços</a>
                 <a href="#medicamentos">Medicamentos</a>
                 <a href="#contato">Contato</a>
+
+                <div class="cart" onclick="abrirCarrinho()">
+                    🛒 <span id="cart-count">0</span>
+                </div>
             </nav>
         </div>
     </header>
@@ -28,7 +32,7 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-        <img src="/src/farmadobem.png" width="30%" height="auto" item-aling="center" alt="Farmácia do Bem">
+            <img src="/src/farmadobem.png" width="35%" height="auto" item-aling="center" alt="Farmácia do Bem">
             <h2>Cuidando da sua saúde com carinho 💚</h2>
             <p>Medicamentos, atendimento rápido e entrega na sua casa.</p>
             <a href="https://wa.me/558335211803" class="btn">Fale no WhatsApp</a>
@@ -99,7 +103,7 @@
             <!-- LOGO + DESCRIÇÃO -->
             <div class="footer-col">
                 <img src="/src/farmadobem.png" width="100px" height="auto" alt="Farmácia do Bem" class="footer-logo">
-                 <p> Cuidando da sua saúde com carinho, oferecendo medicamentos e atendimento de qualidade.</p>
+                <p> Cuidando da sua saúde com carinho, oferecendo medicamentos e atendimento de qualidade.</p>
             </div>
         </div>
 
@@ -108,11 +112,63 @@
         </div>
     </footer>
 
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+    <a rel="https://wa.me/558335211803" class="whatsapp-float" target="_blank">
+        💬
+    </a>
+
+    <!-- MODAL DO CARRINHO -->
+    <div id="carrinho-modal" class="carrinho-modal">
+        <div class="carrinho-conteudo">
+
+            <h2>🛒 Seu Carrinho</h2>
+
+            <div id="carrinho-itens"></div>
+
+            <div class="resumo">
+                <p>Subtotal <span id="carrinho-subtotal">R$ 0,00</span></p>
+                <p>Entrega <span id="carrinho-frete">-</span></p>
+                <p><strong>Total <span id="carrinho-total">R$ 0,00</span></strong></p>
+            </div>
+
+            <!-- ENDEREÇO -->
+            <input type="text" id="endereco" placeholder="Digite seu endereço completo" class="input-campo" />
+
+            <!-- FORMA DE PAGAMENTO -->
+            <select id="pagamento" class="input-campo" onchange="verificarPagamento()">
+                <option value="">Forma de pagamento</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Pix">Pix</option>
+                <option value="Cartão">Cartão</option>
+            </select>
+            <!-- TROCO (ESCONDIDO INICIALMENTE) -->
+            <input type="number" id="troco" placeholder="Precisa de troco para quanto?" class="input-campo"
+                style="display: none;" />
+
+
+
+            <button onclick="enviarPedido()" class="btn-enviar">
+                📦 Enviar Pedido
+            </button>
+
+            <button onclick="finalizarCompra()" class="btn-finalizar">
+                Finalizar no WhatsApp
+            </button>
+
+
+
+            <button onclick="fecharCarrinho()" class="btn-fechar">
+                Fechar
+            </button>
+
+        </div>
+    </div>
 
 
     <!-- SCRIPTS NA ORDEM CORRETA -->
     <script src="/medicamentos.js"></script>
     <script src="/script.js"></script>
+
 
 </body>
 
