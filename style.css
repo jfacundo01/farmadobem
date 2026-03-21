@@ -675,3 +675,10 @@ input {
   background: rgba(255,255,255,0.2);
   opacity: 1;
 }
+
+/* SEÇÃO DE ROTAS */
+#rotas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
