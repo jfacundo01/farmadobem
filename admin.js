@@ -1,3 +1,21 @@
+
+// PROTEÇÃO DE ACESSO
+if (localStorage.getItem("logado") !== "true") {
+  window.location.href = "login.html";
+}
+function logout() {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    localStorage.removeItem("logado");
+    window.location.href = "login.html";
+  }, 400);
+}
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("fade-in");
+});
+
+
 // =============================
 // FORMATAÇÃO DE PREÇO
 // =============================
