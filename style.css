@@ -579,3 +579,99 @@ header {
 .btn-enviar:hover {
   background: #2563eb;
 }
+
+input {
+  margin-bottom: 10px;
+}
+/* BOTÃO SAIR */
+.btn-logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+/* HOVER */
+.btn-logout:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* CLICK */
+.btn-logout:active {
+  transform: scale(0.95);
+}
+
+/* MOBILE AJUSTE */
+@media (max-width: 768px) {
+  .btn-logout {
+    top: 10px;
+    right: 10px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+
+/* ================= ANIMAÇÕES DE TELA ================= */
+
+.fade-out {
+  animation: fadeOut 0.4s forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* BOTÃO ADMIN */
+.admin-link {
+  margin-left: 20px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.admin-link:hover {
+  background: rgba(255,255,255,0.2);
+  opacity: 1;
+}
