@@ -8,9 +8,10 @@
 body {
   background: #f5f7f8;
   color: #333;
+  padding-top: 80px; /* compensar header fixo */
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header {
   background: #0f766e;
   color: white;
@@ -23,7 +24,12 @@ header {
   z-index: 1000;
 
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  box-shadow: 0 5px 2px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+header.scrolled {
+  background: #0b5e58;
+  padding: 10px 0;
 }
 
 .container {
@@ -32,6 +38,11 @@ header {
   align-items: center;
   width: 90%;
   margin: auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
 }
 
 nav a {
@@ -46,7 +57,23 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* HERO */
+/* CARRINHO */
+.cart {
+  margin-left: 20px;
+  background: #f59e0b;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart:hover {
+  background: #d97706;
+}
+
+/* ================= HERO ================= */
 .hero {
   background: linear-gradient(135deg, #0f766e, #14b8a6);
   color: white;
@@ -59,7 +86,7 @@ nav a:hover {
   margin-bottom: 15px;
 }
 
-/* BOTÕES */
+/* BOTÃO PRINCIPAL */
 .btn {
   display: inline-block;
   margin-top: 20px;
@@ -76,7 +103,7 @@ nav a:hover {
   background: #d97706;
 }
 
-/* SECTIONS */
+/* ================= SEÇÕES ================= */
 .section {
   padding: 60px 20px;
   text-align: center;
@@ -87,7 +114,7 @@ nav a:hover {
   margin-bottom: 20px;
 }
 
-/* CARDS */
+/* ================= CARDS ================= */
 .cards {
   display: flex;
   gap: 20px;
@@ -101,7 +128,7 @@ nav a:hover {
   padding: 20px;
   width: 250px;
   border-radius: 16px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
   transition: 0.3s;
   text-align: center;
 }
@@ -110,7 +137,7 @@ nav a:hover {
   transform: translateY(-5px);
 }
 
-/* IMAGENS DOS MEDICAMENTOS (CORRIGIDO) */
+/* IMAGEM */
 .card img {
   width: 100%;
   height: 150px;
@@ -126,10 +153,29 @@ nav a:hover {
   margin: 10px 0;
 }
 
+/* BOTÃO CARRINHO */
+.btn-carrinho {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-carrinho:hover {
+  background: #0b5e58;
+}
+
 /* BOTÃO WHATSAPP */
 .btn-whatsapp {
   display: inline-block;
-  padding: 10px 15px;
+  width: 100%;
+  padding: 10px;
   background: #25d366;
   color: white;
   border-radius: 8px;
@@ -142,12 +188,7 @@ nav a:hover {
   background: #1ebe5d;
 }
 
-/* SEÇÃO DESTAQUE */
-.destaque {
-  background: #e6fffa;
-}
-
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer {
   background: #0f766e;
   color: white;
@@ -169,8 +210,8 @@ footer {
 }
 
 .footer-logo {
-  width: 100%;
-  margin-bottom: 10px;
+  width: 120px;
+  margin-bottom: 15px;
 }
 
 .footer-col h3 {
@@ -195,7 +236,7 @@ footer {
   color: #f59e0b;
 }
 
-/* BOTÃO WHATSAPP */
+/* BOTÃO FOOTER */
 .btn-footer {
   display: inline-block;
   margin-top: 10px;
@@ -205,7 +246,6 @@ footer {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: 0.3s;
 }
 
 .btn-footer:hover {
@@ -214,25 +254,328 @@ footer {
 
 /* LINHA FINAL */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255,255,255,0.2);
   margin-top: 30px;
   padding-top: 15px;
   text-align: center;
   font-size: 0.9rem;
 }
 
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .hero h2 {
-    font-size: 1.8rem;
-  }
+/* ================= WHATSAPP FLUTUANTE ================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  color: white;
+  font-size: 24px;
+  padding: 15px 18px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: 0.3s;
+}
 
+.whatsapp-float:hover {
+  background: #1ebe5d;
+  transform: scale(1.1);
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
     gap: 10px;
   }
 
-  nav a {
-    margin: 0 10px;
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
   }
+
+  nav a {
+    margin: 5px 10px;
+  }
+
+  .hero h2 {
+    font-size: 1.8rem;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+/* ================= MODAL CARRINHO ================= */
+.carrinho-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.carrinho-conteudo {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 420px;
+}
+
+.carrinho-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.carrinho-item small {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* QUANTIDADE */
+.quantidade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantidade button {
+  padding: 4px 8px;
+  border: none;
+  background: #0f766e;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quantidade span {
+  font-weight: bold;
+}
+
+/* INPUTS */
+.input-campo {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* TOTAL */
+.total {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+/* BOTÕES MODAL */
+.btn-finalizar {
+  width: 100%;
+  padding: 10px;
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn-fechar {
+  width: 100%;
+  padding: 10px;
+  background: #ccc;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* ================= BADGE DO CARRINHO ================= */
+.cart {
+  position: relative;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 50%;
+}
+
+/* ================= HEADER MAIS PREMIUM ================= */
+header {
+  backdrop-filter: blur(10px);
+}
+
+/* ================= CARD MAIS PREMIUM ================= */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.5s;
+}
+
+.card:hover::after {
+  left: 100%;
+}
+
+/* ================= BOTÃO ANIMADO ================= */
+.btn-carrinho:active {
+  transform: scale(0.95);
+}
+
+/* ================= MODAL ANIMADO ================= */
+.carrinho-modal {
+  animation: fadeIn 0.3s ease;
+}
+
+.carrinho-conteudo {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); }
+  to { transform: translateY(0); }
+}
+
+/* ================= RESUMO BONITO ================= */
+.resumo {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.resumo p {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.resumo strong {
+  font-size: 1.1rem;
+}
+
+/* ================= INPUTS MAIS PREMIUM ================= */
+.input-campo {
+  background: #f9fafb;
+}
+
+/* ================= BOTÃO FLUTUANTE COM PULSE ================= */
+.whatsapp-float {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* administração de pedidos */
+#lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.kanban {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.coluna {
+  flex: 1;
+  min-width: 300px;
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.coluna h3 {
+  margin-bottom: 10px;
+  color: #0f766e;
+}
+
+.coluna .card {
+  margin-bottom: 10px;
+}
+
+.coluna button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: #0f766e;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.coluna:nth-child(1) {
+  border-top: 5px solid #f59e0b; /* recebidos */
+}
+
+.coluna:nth-child(2) {
+  border-top: 5px solid #3b82f6; /* preparação */
+}
+
+.coluna:nth-child(3) {
+  border-top: 5px solid #22c55e; /* enviados */
+}
+
+
+.coluna button:last-child {
+  background: #ef4444;
+}
+
+
+.btn-enviar {
+  width: 100%;
+  padding: 12px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-enviar:hover {
+  background: #2563eb;
 }
