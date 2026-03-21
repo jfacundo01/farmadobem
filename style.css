@@ -682,3 +682,105 @@ input {
   flex-direction: column;
   gap: 10px;
 }
+
+/* ================= CHAT ================= */
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+  font-family: Arial;
+  z-index: 2000;
+}
+
+.chat-header {
+  background: #0f766e;
+  color: white;
+  padding: 12px;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chat-body {
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 10px;
+  height: 300px;
+  flex-direction: column;
+}
+
+#chat-mensagens {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.msg {
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.cliente {
+  background: #d1fae5;
+  text-align: right;
+}
+
+.loja {
+  background: #e5e7eb;
+  text-align: left;
+}
+
+#chat-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-body button {
+  width: 100%;
+  padding: 8px;
+  background: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#chat-admin-mensagens {
+  height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#admin-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+}
+
+.btn-encerrar-chat {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-encerrar-chat:hover {
+  background: #dc2626;
+}
