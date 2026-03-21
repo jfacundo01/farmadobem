@@ -1,23 +1,17 @@
-
-// PROTEÇÃO DE ACESSO
+// =============================
+// 🔐 PROTEÇÃO DE ACESSO
+// =============================
 if (localStorage.getItem("logado") !== "true") {
   window.location.href = "login.html";
 }
-function logout() {
-  document.body.classList.add("fade-out");
-
-  setTimeout(() => {
-    localStorage.removeItem("logado");
-    window.location.href = "login.html";
-  }, 400);
-}
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("fade-in");
-});
-
 
 // =============================
-// FORMATAÇÃO DE PREÇO
+// 📍 ENDEREÇO FIXO DA FARMÁCIA
+// =============================
+const ORIGEM = "Rua Sinfrônio Nazare, 13A - Sousa/PB";
+
+// =============================
+// 💰 FORMATAÇÃO DE PREÇO
 // =============================
 function formatarPreco(valor) {
   return valor.toLocaleString("pt-BR", {
@@ -27,7 +21,7 @@ function formatarPreco(valor) {
 }
 
 // =============================
-// CARREGAR PEDIDOS
+// 📦 CARREGAR PEDIDOS (KANBAN)
 // =============================
 function carregarPedidos() {
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
@@ -88,7 +82,6 @@ function carregarPedidos() {
       ` : ""}
     `;
 
-    // DISTRIBUIR NAS COLUNAS
     if (pedido.status === "recebido") {
       recebidos.appendChild(div);
     } else if (pedido.status === "preparacao") {
@@ -100,7 +93,7 @@ function carregarPedidos() {
 }
 
 // =============================
-// MUDAR STATUS
+// 🔄 MUDAR STATUS
 // =============================
 function mudarStatus(index, novoStatus) {
   let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
@@ -110,17 +103,18 @@ function mudarStatus(index, novoStatus) {
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
   carregarPedidos();
+  carregarRotas();
 }
 
 // =============================
-// MARCAR COMO RECEBIDO
+// 📦 MARCAR COMO RECEBIDO
 // =============================
 function marcarRecebido(index) {
   alert("Pedido entregue com sucesso ao cliente!");
 }
 
 // =============================
-// ENCERRAR PEDIDO
+// ❌ ENCERRAR PEDIDO (SALVA HISTÓRICO)
 // =============================
 function encerrarPedido(index) {
   let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
@@ -130,7 +124,6 @@ function encerrarPedido(index) {
 
   const pedidoEncerrado = pedidos[index];
 
-  // salva como concluído
   concluidos.push({
     ...pedidoEncerrado,
     encerradoEm: new Date().toLocaleString()
@@ -138,14 +131,51 @@ function encerrarPedido(index) {
 
   localStorage.setItem("pedidosConcluidos", JSON.stringify(concluidos));
 
-  // remove da lista ativa
   pedidos.splice(index, 1);
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
   carregarPedidos();
+  carregarRotas();
   atualizarResumo();
 }
 
+// =============================
+// 🗺️ ROTAS DE ENTREGA
+// =============================
+function carregarRotas() {
+  const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  const rotas = document.getElementById("rotas");
+
+  if (!rotas) return;
+
+  rotas.innerHTML = "";
+
+  pedidos.forEach(pedido => {
+    if (pedido.status !== "enviado") return;
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    const destino = pedido.endereco;
+
+    const linkMapa = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(ORIGEM)}&destination=${encodeURIComponent(destino)}&travelmode=driving`;
+
+    div.innerHTML = `
+      <h3>Pedido #${pedido.numero}</h3>
+      <p><strong>Destino:</strong> ${destino}</p>
+
+      <a href="${linkMapa}" target="_blank" class="btn-whatsapp">
+        🗺️ Ver Rota
+      </a>
+    `;
+
+    rotas.appendChild(div);
+  });
+}
+
+// =============================
+// 📊 RESUMO DO DIA
+// =============================
 function atualizarResumo() {
   const resumo = document.getElementById("resumo-dia");
 
@@ -155,30 +185,41 @@ function atualizarResumo() {
 
   const hoje = new Date().toLocaleDateString();
 
-  const pedidosHoje = concluidos.filter(pedido =>
-    pedido.encerradoEm.startsWith(hoje)
+  const pedidosHoje = concluidos.filter(p =>
+    p.encerradoEm.startsWith(hoje)
   );
 
   resumo.innerText = `📊 Pedidos concluídos hoje: ${pedidosHoje.length}`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  carregarPedidos();
-  atualizarResumo();
-});
+// =============================
+// 🚪 LOGOUT COM ANIMAÇÃO
+// =============================
+function logout() {
+  document.body.classList.add("fade-out");
 
+  setTimeout(() => {
+    localStorage.removeItem("logado");
+    window.location.href = "login.html";
+  }, 400);
+}
+
+// =============================
+// 🔄 AUTO ATUALIZAÇÃO
+// =============================
 setInterval(() => {
   carregarPedidos();
+  carregarRotas();
   atualizarResumo();
 }, 5000);
 
+// =============================
+// 🚀 INIT
+// =============================
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("fade-in");
 
-// =============================
-// AUTO ATUALIZAÇÃO
-// =============================
-setInterval(carregarPedidos, 5000);
-
-// =============================
-// INIT
-// =============================
-document.addEventListener("DOMContentLoaded", carregarPedidos);
+  carregarPedidos();
+  carregarRotas();
+  atualizarResumo();
+});
