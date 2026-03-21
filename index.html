@@ -7,10 +7,31 @@
     <title>Farmácia DoBem</title>
 
     <!-- CSS correto -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
+<!-- CHAT FLUTUANTE -->
+<div class="chat-container" id="chat-container">
+
+  <div class="chat-header" onclick="toggleChat()">
+    💬 Atendimento
+  </div>
+
+  <div class="chat-body" id="chat-body">
+    <div id="chat-mensagens"></div>
+
+    <input 
+      type="text" 
+      id="chat-input" 
+      placeholder="Digite sua mensagem..."
+      onkeypress="if(event.key==='Enter') enviarMensagem()"
+    >
+
+    <button onclick="enviarMensagem()">Enviar</button>
+  </div>
+
+</div>
 
     <!-- HEADER -->
     <header>
@@ -33,7 +54,7 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <img src="src/farmadobem.png" width="35%" height="auto" item-aling="center" alt="Farmácia do Bem">
+            <img src="/src/farmadobem.png" width="35%" height="auto" item-aling="center" alt="Farmácia do Bem">
             <h2>Cuidando da sua saúde com carinho 💚</h2>
             <p>Medicamentos, atendimento rápido e entrega na sua casa.</p>
             <a href="https://wa.me/558335211803" class="btn">Fale no WhatsApp</a>
@@ -103,7 +124,7 @@
             </div>
             <!-- LOGO + DESCRIÇÃO -->
             <div class="footer-col">
-                <img src="src/farmadobem.png" width="100px" height="auto" alt="Farmácia do Bem" class="footer-logo">
+                <img src="/src/farmadobem.png" width="100px" height="auto" alt="Farmácia do Bem" class="footer-logo">
                 <p> Cuidando da sua saúde com carinho, oferecendo medicamentos e atendimento de qualidade.</p>
             </div>
         </div>
@@ -167,8 +188,8 @@
 
 
     <!-- SCRIPTS NA ORDEM CORRETA -->
-    <script src="medicamentos.js"></script>
-    <script src="script.js"></script>
+    <script src="/medicamentos.js"></script>
+    <script src="/script.js"></script>
 
 
 </body>
